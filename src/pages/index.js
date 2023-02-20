@@ -41,9 +41,9 @@ export default function Home() {
                         <div className="fixed w-max bg-zinc-200 py-7 px-7 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-sm shadow-lg shadow-black/25">
                             <h1 className="text-xl md:text-3xl font-black mb-5">Account data</h1>
                             <div className="flex flex-col gap-2 font-medium">
-                                <span>Name: {user.name}</span>
+                                <span>Name: {user?.name}</span>
                                 <hr className="bg-black" />
-                                <span>Email: {user.email}</span>
+                                <span>Email: {user?.email}</span>
                             </div>
 
                             <button 
@@ -61,7 +61,7 @@ export default function Home() {
                     {
                         user ?
                         <div>
-                            <h1 className="bg-black text-white text-center p-3 rounded-lg text-6xl">Olá, {user.name}!</h1>
+                            <h1 className="bg-black text-white text-center p-3 rounded-lg text-6xl">Olá, {user?.name}!</h1>
                         </div> :
                         null
                     }
