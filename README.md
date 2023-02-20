@@ -11,3 +11,5 @@ In this project, i used JSON Web Token to authenticate users and give them acces
 * Nookies
 * Jsonwebtoken
 * bcrypt
+* Prisma
+* MongoDB
