@@ -61,7 +61,7 @@ export default function Home() {
                     {
                         user ?
                         <div>
-                            <h1 className="bg-black text-white text-center p-3 rounded-lg text-6xl">Olá, {user?.name}!</h1>
+                            <h1 className="bg-black text-white text-center p-3 rounded-lg text-6xl">Hello, {user?.name}!</h1>
                         </div> :
                         null
                     }
