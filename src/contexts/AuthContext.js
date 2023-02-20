@@ -5,28 +5,20 @@ import Router from 'next/router'
 
 export const AuthContext = createContext({})
 
-export default function AuthProvider({ children }) {
+export default function AuthProvider({ children, token}) {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
         const { 'auth-token': token } = parseCookies()
 
         const signUpURLPathName = "/createNewAccount"
-        const signInURLPathName = "/login"
 
         if (Router.pathname != signUpURLPathName) {
             if (token) {
                 axios(`../api/auth?token=${token}`)
                     .then(response => setUser(response.data))
                     .catch(err => console.log(err))
-            } else {
-                Router.push('/login')
-            }
-        } if (Router.pathname == signInURLPathName) {
-            if (token) {
-                console.log("Oa")
-                Router.push('/')
-            }
+            } 
         }
     }, [])
 

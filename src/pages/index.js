@@ -1,7 +1,7 @@
 import { AuthContext } from "@/contexts/AuthContext"
 import { useContext, useState } from "react"
 import { Fade } from 'react-reveal'
-import { destroyCookie } from 'nookies'
+import { destroyCookie, parseCookies } from 'nookies'
 import Router from "next/router"
 import Modal from 'react-modal'
 
@@ -69,4 +69,21 @@ export default function Home() {
             </Fade>
         </div>
     )
+}
+
+export const getServerSideProps = (ctx) => {
+    const { 'auth-token': token } = parseCookies(ctx)
+
+    if (!token) {
+        return {
+            redirect: {
+                destination: "/login",
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
 }
