@@ -3,12 +3,15 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Router from 'next/router'
 import { Fade } from 'react-reveal'
+import { useState } from 'react'
 
 export default function CreateNewAccount() {
+  const [ button, setButton ] = useState("Sign up")
   const { register, handleSubmit, formState: { errors }} = useForm()
 
   async function handleSignUp(data) {
     try {
+      setButton("Creating...")
       const response = await axios.post(`../api/users`, {
           name: data.name,
           email: data.email,
@@ -21,6 +24,8 @@ export default function CreateNewAccount() {
     } catch(err) {
       alert(err.response.data)
       console.log(err)
+    } finally {
+      setButton("Sign up")
     }
   }
 
@@ -89,7 +94,7 @@ export default function CreateNewAccount() {
               </Fade>
             }
 
-            <button className="bg-cyan-600 rounded-md py-2 mt-5">Sign up</button>
+            <button className="bg-cyan-600 rounded-md py-2 mt-5">{button}</button>
           </form>
         </div>
       </main>

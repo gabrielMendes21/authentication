@@ -3,15 +3,23 @@ import { AuthContext } from '@/contexts/AuthContext'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Fade } from 'react-reveal'
 
 export default function Login() {
+  const [ button, setButton ] = useState("Sign in")
   const { register, handleSubmit, formState: { errors } } = useForm()
   const { signIn } = useContext(AuthContext)
 
   async function handleSignIn(data) {
-    await signIn(data)
+    try {
+      setButton("Signing in...")
+      await signIn(data)
+    } catch(err) {
+      console.log(err)
+    } finally {
+      setButton("Sign in")
+    }
   }
 
   return (
@@ -55,7 +63,11 @@ export default function Login() {
                 </Fade>
               }
 
-              <button className="bg-cyan-600 rounded-md py-2 mt-5">Sign in</button>
+              <button 
+                className="bg-cyan-600 rounded-md py-2 mt-5"
+              >
+                {button}
+              </button>
             </form>
             <Link href="./createNewAccount" className="block mt-4 text-blue-500">Create a new account</Link>
           </div>
