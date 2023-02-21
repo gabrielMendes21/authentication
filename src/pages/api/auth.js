@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         // Check if the token is valid
         jwt.verify(tokenValue, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
-                res.status(403).send()
+                res.status(401).send()
             }
             res.send(user)
         })
